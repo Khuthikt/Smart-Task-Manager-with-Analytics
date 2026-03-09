@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Add Task</title>
+</head>
+
+<body>
+
+<h1>Add Task</h1>
+
+<form method="POST">
+
+<label>Title</label>
+<input type="text" name="title" required>
+
+<br><br>
+
+<label>Description</label>
+<input type="text" name="description">
+
+<br><br>
+
+<label>Due Date</label>
+<input type="date" name="due_date">
+
+<br><br>
+
+<label>Priority</label>
+
+<select name="priority">
+
+<option value="Low">Low</option>
+<option value="Medium">Medium</option>
+<option value="High">High</option>
+
+</select>
+
+<label>Status</label>
+
+<select name="status">
+
+<option value="pending">Pending</option>
+<option value="in-progress">In Progress</option>
+<option value="completed">Completed</option>
+
+</select>
+
+<br><br>
+
+<button type="submit">Add Task</button>
+
+</form>
+
+<br>
+
+<a href="/">Back</a>
+
+</body>
+
+</html>

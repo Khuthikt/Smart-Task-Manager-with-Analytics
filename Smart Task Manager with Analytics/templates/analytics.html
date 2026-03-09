@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Analytics</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body{
+            font-family: Arial;
+            margin:40px;
+        }
+
+        h1{
+            margin-bottom:20px;
+        }
+
+        canvas{
+            max-width:700px;
+            margin-bottom:50px;
+        }
+
+        a{
+            text-decoration:none;
+            color:blue;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Task Analytics</h1>
+
+<a href="/">Back to Tasks</a>
+
+<br><br>
+
+<h2>Tasks by Status</h2>
+<canvas id="statusChart"></canvas>
+
+<h2>Tasks Due Per Day</h2>
+<canvas id="dueChart"></canvas>
+
+<script>
+
+const statusData = JSON.parse('{{ status_counts | tojson | safe }}');
+const dueData = JSON.parse('{{ due_counts | tojson | safe }}');
+
+
+/* STATUS CHART */
+
+const statusLabels = Object.keys(statusData);
+const statusValues = Object.values(statusData);
+
+new Chart(document.getElementById("statusChart"),{
+    type:'bar',
+    data:{
+        labels:statusLabels,
+        datasets:[{
+            label:'Tasks',
+            data:statusValues
+        }]
+    }
+});
+
+
+/* DUE DATE CHART */
+
+const dueLabels = Object.keys(dueData);
+const dueValues = Object.values(dueData);
+
+new Chart(document.getElementById("dueChart"),{
+    type:'line',
+    data:{
+        labels:dueLabels,
+        datasets:[{
+            label:'Tasks Due',
+            data:dueValues,
+            fill:false
+        }]
+    }
+});
+
+</script>
+
+</body>
+</html>

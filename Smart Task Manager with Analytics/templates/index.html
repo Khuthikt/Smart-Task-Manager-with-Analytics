@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Task Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <h1>Smart Task Manager</h1>
+
+    <!-- Navigation -->
+    <div style="margin-bottom:20px;">
+        <a href="/add">Add Task</a> |
+        <a href="/analytics">Analytics</a>
+    </div>
+
+    <!-- Search bar -->
+    <form action="/search" style="margin-bottom:20px;">
+        <input type="text" name="keyword" placeholder="Search tasks">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Dashboard summary cards -->
+    <h2>Dashboard</h2>
+    <div class="card">Total Tasks: {{ total }}</div>
+    <div class="card">Completed: {{ completed }}</div>
+    <div class="card">Pending: {{ pending }}</div>
+
+    <!-- Tasks table -->
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Due Date</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task['title'] }}</td>
+            <td>{{ task['description'] }}</td>
+            <td>{{ task['due_date'] }}</td>
+            <td>{{ task['priority'] }}</td>
+            <td>{{ task['status'] }}</td>
+            <td>
+                <a class="action-btn" href="/complete/{{ task['id'] }}" data-tooltip="Completed">✔</a>
+                <a class="action-btn" href="/edit/{{ task['id'] }}" data-tooltip="Edit">✏</a>
+                <a class="action-btn" href="/delete/{{ task['id'] }}" data-tooltip="Delete">🗑</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+
+</html>
